@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --card: 255 255 255;
+    --muted: 245 246 248;
+    --border: 229 231 235;
+    --foreground: 11 13 18;
+    --muted-foreground: 91 100 114;
+    --primary: 200 16 46;
+    --primary-hover: 165 13 38;
+    --primary-foreground: 255 255 255;
+    --success: 22 163 74;
+    --warning: 217 119 6;
+    --danger: 220 38 38;
+    --info: 37 99 235;
+    --ring: 200 16 46;
+    /* public site only: always-dark hero and the black logo tile */
+    --hero: 11 13 18;
+    --hero-foreground: 243 244 246;
+    --logo: 0 0 0;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 11 13 18;
+    --card: 18 21 28;
+    --muted: 26 30 39;
+    --border: 38 43 54;
+    --foreground: 243 244 246;
+    --muted-foreground: 154 163 178;
+    --primary: 225 29 63;
+    --primary-hover: 244 63 94;
+    --primary-foreground: 255 255 255;
+    --success: 34 197 94;
+    --warning: 245 158 11;
+    --danger: 239 68 68;
+    --info: 96 165 250;
+    --ring: 225 29 63;
+    --hero: 11 13 18;
+    --hero-foreground: 243 244 246;
+    --logo: 0 0 0;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgb(var(--primary) / 0.2);
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Native <select> with a neutral chevron that works in light and dark mode. */
+  .select-chevron {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b93a1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--border)) transparent;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
