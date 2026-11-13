@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, PlusCircle, X } from 'lucide-react';
@@ -50,6 +51,7 @@ export function Header({ siteName, listButtonLabel, listContent }: HeaderProps) 
   }, [menuOpen]);
 
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         <Logo size="md" name={siteName} className="min-w-0 [&>span:last-child]:hidden sm:[&>span:last-child]:inline xl:[&>span:last-child]:inline" />
@@ -93,8 +95,10 @@ export function Header({ siteName, listButtonLabel, listContent }: HeaderProps) 
           </button>
         </div>
       </div>
+    </header>
 
-      {menuOpen ? (
+      {menuOpen && typeof document !== 'undefined'
+        ? createPortal(
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <div
             aria-hidden="true"
@@ -147,8 +151,9 @@ export function Header({ siteName, listButtonLabel, listContent }: HeaderProps) 
               />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
-    </header>
+    </>
   );
 }
